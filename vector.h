@@ -25,6 +25,6 @@ void bubbleSort(vector v, bool sens); //sens == 0 - crescator
 void insertSort(vector v, bool sens); //sens == 0 - crescator
 void selectionSort(vector v, bool sens); //sens == 0 - crescator
 
-void shiftVect(vector v, bool sens) //sens == 0 - dreapta
+void shiftVect(vector v, bool sens); //sens == 0 - dreapta
 
 #endif //BIBMAT_VECTOR_H

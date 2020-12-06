@@ -9,7 +9,7 @@ struct matrice{
 };
 
 matrice nullMatrix(int , int );
-matrice _null = nullMatrix(0,0);
+matrice null = nullMatrix(0,0);
 
 void readMat    (int, int, matrice&);
 void printMat   (matrice );

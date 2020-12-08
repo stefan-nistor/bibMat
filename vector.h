@@ -3,9 +3,6 @@
 
 
 
-
-using namespace std;
-
 struct vector{
     int v[100];
     int dim;
@@ -15,32 +12,34 @@ void printVect(vector a)
 {
     int i;
     for(i=0;i<a.dim;i++)
-        cout<<a.v[i]<<" ";
-    cout<<endl;
+        std::cout<<a.v[i]<<" ";
+    std::cout<<"\n";
 }
 
 //de la tastatura
 void readVect(vector &a)
 {
     int i;
-    cout<<"Introduceti dimensiunea vectorului: ";
-    cin>>a.dim;
-    cout<<endl<<"Introduceti elementele vectorului: ";
+    std::cout<<"Introduceti dimensiunea vectorului: ";
+    std::cin>>a.dim;
+    std::cout<<"\n"<<"Introduceti elementele vectorului: ";
     for(i=0;i<a.dim;i++)
-        cin>>a.v[i];
+        std::cin>>a.v[i];
 }
 
 
 //din fisier
 void readfVect(vector &a)
 {
-    ifstream fin("date.in");
+    FILE * fin;
+    fin=fopen("date.in","r");
     a.dim=0;
-    while(!fin.eof())
+    while(!feof(fin))
     {
-        fin>>a.v[a.dim];
+        fscanf(fin,"%d",&a.v[a.dim]);
         a.dim++;
     }
+    fclose(fin);
 }
 
 int sumVector(vector a)

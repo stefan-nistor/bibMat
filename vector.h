@@ -1,30 +1,181 @@
+#ifndef VECTOR_H_INCLUDED
+#define VECTOR_H_INCLUDED
 
-#ifndef BIBMAT_VECTOR_H
-#define BIBMAT_VECTOR_H
+
+
+
+using namespace std;
 
 struct vector{
-    int *v;
+    int v[100];
     int dim;
 };
 
+void printVect(vector a)
+{
+    int i;
+    for(i=0;i<a.dim;i++)
+        cout<<a.v[i]<<" ";
+    cout<<endl;
+}
+
 //de la tastatura
-void readVect();
-void printVect(vector v);
+void readVect(vector &a)
+{
+    int i;
+    cout<<"Introduceti dimensiunea vectorului: ";
+    cin>>a.dim;
+    cout<<endl<<"Introduceti elementele vectorului: ";
+    for(i=0;i<a.dim;i++)
+        cin>>a.v[i];
+}
+
 
 //din fisier
-void readfVect();
-void printfVect(vector v);
+void readfVect(vector &a)
+{
+    ifstream fin("date.in");
+    a.dim=0;
+    while(!fin.eof())
+    {
+        fin>>a.v[a.dim];
+        a.dim++;
+    }
+}
 
-//operatii
-int sumVect(vector v);
-int prodVect(vector v);
-void scalarVect(vector v, int scalar);
+int sumVector(vector a)
+{
+    int sum=0,i;
+    for(i=0;i<a.dim;i++)
+        sum+=a.v[i];
+    return sum;
+}
 
-//Sortari
-void bubbleSort(vector v, bool sens); //sens == 0 - crescator
-void insertSort(vector v, bool sens); //sens == 0 - crescator
-void selectionSort(vector v, bool sens); //sens == 0 - crescator
+int prodVector(vector a)
+{
+    int prod=1,i;
+    for(i=0;i<a.dim;i++)
+        prod*=a.v[i];
+    return prod;
+}
 
-void shiftVect(vector v, bool sens); //sens == 0 - dreapta
+void scalarVect(vector a, int scalar)
+{
+    int i;
+    for(i=0;i<a.dim;i++)
+        a.v[i]*=a.v[i];
 
-#endif //BIBMAT_VECTOR_H
+}
+
+
+void bubbleSort(vector a, bool sens) //sens == 0 - crescator
+{
+    int i,j,aux;
+    for (i=0;i<a.dim-1;i++)
+      for (j=0;j<a.dim-i-1;j++)
+        if(sens==0)
+        {
+            if (a.v[j]>a.v[j+1])
+            {
+                aux=a.v[j];
+                a.v[j]=a.v[j+1];
+                a.v[j+1]=aux;
+            }
+        }
+        else
+        {
+            if (a.v[j]<a.v[j+1])
+            {
+                aux=a.v[j];
+                a.v[j]=a.v[j+1];
+                a.v[j+1]=aux;
+            }
+        }
+        printVect(a);
+}
+
+
+void insertSort(vector a, bool sens) //sens == 0 - crescator
+{
+    int i,key,j;
+    for(i=1;i<a.dim;i++)
+    {
+        key=a.v[i];
+        j=i-1;
+        if(sens==0)
+        {   while(j>=0&&a.v[j]>key)
+            {
+                a.v[j+1]=a.v[j];
+                j--;
+            }
+            a.v[j+1]=key;
+        }
+        else
+        {
+             while(j>=0&&a.v[j]<key)
+            {
+                a.v[j+1]=a.v[j];
+                j--;
+            }
+            a.v[j+1]=key;
+        }
+    }
+    printVect(a);
+}
+
+
+void selectionSort(vector a, bool sens) //sens == 0 - crescator
+{
+    int i,j,aux;
+    for(i=0;i<a.dim-1;i++)
+        for(j=i+1;j<a.dim;j++)
+        if(sens==0)
+        {
+            if(a.v[i]>a.v[j])
+            {
+                aux=a.v[j];
+                a.v[j]=a.v[i];
+                a.v[i]=aux;
+            }
+        }
+        else
+        {
+            if(a.v[i]<a.v[j])
+            {
+                aux=a.v[j];
+                a.v[j]=a.v[i];
+                a.v[i]=aux;
+            }
+        }
+        printVect(a);
+}
+
+void shiftVect(vector a, bool sens, int pozShift) //sens == 0 - dreapta
+{
+    int i,j,aux;
+    if(sens==0)
+    {
+        for(i=1;i<=pozShift;i++)
+        {
+            aux=a.v[a.dim-1];
+            for(j=a.dim-1;j>0;j--)
+                a.v[j]=a.v[j-1];
+            a.v[0]=aux;
+        }
+    }
+    else
+    {
+       for(i=1;i<=pozShift;i++)
+        {
+            aux=a.v[0];
+            for(j=0;j<a.dim-1;j++)
+                a.v[j]=a.v[j+1];
+            a.v[a.dim-1]=aux;
+        }
+    }
+    printVect(a);
+}
+
+
+
+#endif // VECTOR_H_INCLUDED

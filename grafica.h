@@ -16,12 +16,12 @@ void desenare()
     tw=textwidth("BibMat");
     th=textheight("BibMat");
     outtextxy((960-tw)/2+480,(140-th)/2+60,"BibMat");
-    tw=textwidth("Matrici");
-    th=textheight("Matrici");
-    outtextxy((960-tw)/2+480,(140-th)/2+460,"Matrici");
     tw=textwidth("Vectori");
     th=textheight("Vectori");
     outtextxy((960-tw)/2+480,(140-th)/2+260,"Vectori");
+    tw=textwidth("Matrici");
+    th=textheight("Matrici");
+    outtextxy((960-tw)/2+480,(140-th)/2+460,"Matrici");
 }
 
 void desenareVectori()
@@ -55,7 +55,7 @@ void desenareVectori()
         {
             tw=textwidth("BubbleSort");
             th=textheight("BubbleSort");
-            outtextxy((320-tw)/2+1550,(50-th)/2+dis,"BubbeSort");
+            outtextxy((320-tw)/2+1550,(50-th)/2+dis,"BubbleSort");
         }
         if(i==2)
         {
@@ -164,14 +164,44 @@ void paginaMatrici()
 
 void pagina()
 {
-    int x,y,ok;
+    int x,y,ok,i;
+    vector a,b;
+    a.dim=b.dim=0;
     setactivepage(1);
     setvisualpage(1);
+    settextstyle(0,0,10);
     ok=0;
     do
     {
+        if(ismouseclick(WM_MOUSEMOVE))
+        {
+            clearmouseclick(WM_MOUSEMOVE);
+            x=mousex();
+            y=mousey();
+            if(a.dim>=15)
+            {
+                setcolor(RGB(95, 59, 92));
+                for(i=0;i<=a.dim;i++)
+                    circle(a.v[i],b.v[i],10);
+                a.dim=b.dim=0;
+            }
+            if(!(x>=450&&x<=1450&&y>=250&&y<=410)&&!(x>=450&&x<=1450&&y>=450&&y<=610)&&!(x>=450&&x<=1480&&y>=50&&y<=210))
+            {
+                setcolor(WHITE);
+                circle(x,y,10);
+                a.v[a.dim++]=x;
+                b.v[b.dim++]=y;
+            }
+        }
         if(ismouseclick(WM_LBUTTONDOWN))
         {
+            if(a.dim)
+            {
+                setcolor(RGB(95, 59, 92));
+                for(i=0;i<=a.dim;i++)
+                    circle(a.v[i],b.v[i],10);
+                a.dim=b.dim=0;
+            }
             clearmouseclick(WM_LBUTTONDOWN);
             x=mousex();
             y=mousey();

@@ -11,22 +11,24 @@ struct vector{
 
 void interschimba(vector a,int i,int j)
 {
+    float dis=1400/(a.dim*1.0);
     setcolor(BLACK);
-    line(50+(1400/(a.dim*1.0))*i,800,50+(1400/(a.dim*1.0))*i,200);
-    line(50+(1400/(a.dim*1.0))*j,800,50+(1400/(a.dim*1.0))*j,200);
+    line(50+dis/2+dis*i,800,50+dis/2+dis*i,200);
+    line(50+dis/2+dis*j,800,50+dis/2+dis*j,200);
     setcolor(GREEN);
-    line(50+(1400/(a.dim*1.0))*i,800,50+(1400/(a.dim*1.0))*i,800-a.v[j]);
-    line(50+(1400/(a.dim*1.0))*j,800,50+(1400/(a.dim*1.0))*j,800-a.v[i]);
+    line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[j]);
+    line(50+dis/2+dis*j,800,50+dis/2+dis*j,800-a.v[i]);
 }
 
 void printVect(vector a)
 {
     int i;
+    float dis=1400/(a.dim*1.0);
     setfillstyle(1,BLACK);
     bar(50,200,1450,800);
     setcolor(GREEN);
     for(i=0;i<a.dim;i++)
-        line(50+(1400/(a.dim*1.0))*i,800,50+(1400/(a.dim*1.0))*i,800-a.v[i]);
+        line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[i]);
 }
 
 //de la tastatura

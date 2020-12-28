@@ -2,7 +2,6 @@
 #include <winbgim.h>
 #include <graphics.h>
 #include <fstream>
-#include <iomanip>
 #include <time.h>
 #include "vector.h"
 #include "grafica.h"

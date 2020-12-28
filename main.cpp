@@ -1,6 +1,15 @@
 #include <iostream>
-#include "matrix.h"
+#include <winbgim.h>
+#include <graphics.h>
+#include <fstream>
+#include <iomanip>
+#include <time.h>
+#include "vector.h"
+#include "grafica.h"
 
-int main() {
+int main()
+{
+    srand (time(NULL));
+    desenarePagina();
     return 0;
 }

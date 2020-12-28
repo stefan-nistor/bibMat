@@ -4,27 +4,51 @@
 
 
 struct vector{
-    int v[100];
+    float v[10000];
     int dim;
 };
+
+
+void interschimba(vector a,int i,int j)
+{
+    setcolor(BLACK);
+    line(50+(1400/(a.dim*1.0))*i,800,50+(1400/(a.dim*1.0))*i,200);
+    line(50+(1400/(a.dim*1.0))*j,800,50+(1400/(a.dim*1.0))*j,200);
+    setcolor(GREEN);
+    line(50+(1400/(a.dim*1.0))*i,800,50+(1400/(a.dim*1.0))*i,800-a.v[j]);
+    line(50+(1400/(a.dim*1.0))*j,800,50+(1400/(a.dim*1.0))*j,800-a.v[i]);
+}
 
 void printVect(vector a)
 {
     int i;
+    setfillstyle(1,BLACK);
+    bar(50,200,1450,800);
+    setcolor(GREEN);
     for(i=0;i<a.dim;i++)
-        std::cout<<a.v[i]<<" ";
-    std::cout<<"\n";
+        line(50+(1400/(a.dim*1.0))*i,800,50+(1400/(a.dim*1.0))*i,800-a.v[i]);
 }
 
 //de la tastatura
-void readVect(vector &a)
+void readInterval(vector &v)
 {
-    int i;
-    std::cout<<"Introduceti dimensiunea vectorului: ";
-    std::cin>>a.dim;
-    std::cout<<"\n"<<"Introduceti elementele vectorului: ";
-    for(i=0;i<a.dim;i++)
-        std::cin>>a.v[i];
+    int i=0,tw,dis=0;
+    char c[100];
+    setcolor(WHITE);
+    tw=textwidth("Introduceti numarul de numere: ");
+    outtextxy(100,120,"Introduceti numarul de numere: ");
+    c[i]=getch();
+    while(int(c[i])!=32)
+    {
+        bgiout<<c[i];
+        outstreamxy(tw+100+dis*10,120);
+        dis+=2;
+        i++;
+        c[i]=getch();
+    }
+    v.dim=atoi(c);
+    for(i=0;i<v.dim;i++)
+        v.v[i]=rand()%600;
 }
 
 
@@ -67,34 +91,39 @@ void scalarVect(vector a, int scalar)
 }
 
 
-void bubbleSort(vector a, bool sens) //sens == 0 - crescator
+void bubbleSort(vector &a, bool sens) //sens == 0 - crescator
 {
     int i,j,aux;
     for (i=0;i<a.dim-1;i++)
-      for (j=0;j<a.dim-i-1;j++)
-        if(sens==0)
-        {
-            if (a.v[j]>a.v[j+1])
+    {
+        for (j=0;j<a.dim-i-1;j++)
+            if(sens==0)
             {
-                aux=a.v[j];
-                a.v[j]=a.v[j+1];
-                a.v[j+1]=aux;
+                if (a.v[j]>a.v[j+1])
+                {
+                    interschimba(a,j,j+1);
+                    delay(50);
+                    aux=a.v[j];
+                    a.v[j]=a.v[j+1];
+                    a.v[j+1]=aux;
+                }
             }
-        }
-        else
-        {
-            if (a.v[j]<a.v[j+1])
+            else
             {
-                aux=a.v[j];
-                a.v[j]=a.v[j+1];
-                a.v[j+1]=aux;
+                if (a.v[j]<a.v[j+1])
+                {
+                    interschimba(a,j,j+1);
+                    delay(50);
+                    aux=a.v[j];
+                    a.v[j]=a.v[j+1];
+                    a.v[j+1]=aux;
+                }
             }
-        }
-        printVect(a);
+    }
 }
 
 
-void insertSort(vector a, bool sens) //sens == 0 - crescator
+void insertSort(vector &a, bool sens) //sens == 0 - crescator
 {
     int i,key,j;
     for(i=1;i<a.dim;i++)
@@ -104,26 +133,31 @@ void insertSort(vector a, bool sens) //sens == 0 - crescator
         if(sens==0)
         {   while(j>=0&&a.v[j]>key)
             {
+                interschimba(a,j,j+1);
+                delay(50);
                 a.v[j+1]=a.v[j];
                 j--;
             }
             a.v[j+1]=key;
+            printVect(a);
         }
         else
         {
              while(j>=0&&a.v[j]<key)
             {
+                interschimba(a,j,j+1);
+                delay(50);
                 a.v[j+1]=a.v[j];
                 j--;
             }
             a.v[j+1]=key;
+            printVect(a);
         }
     }
-    printVect(a);
 }
 
 
-void selectionSort(vector a, bool sens) //sens == 0 - crescator
+void selectionSort(vector &a, bool sens) //sens == 0 - crescator
 {
     int i,j,aux;
     for(i=0;i<a.dim-1;i++)
@@ -132,6 +166,8 @@ void selectionSort(vector a, bool sens) //sens == 0 - crescator
         {
             if(a.v[i]>a.v[j])
             {
+                interschimba(a,i,j);
+                delay(50);
                 aux=a.v[j];
                 a.v[j]=a.v[i];
                 a.v[i]=aux;
@@ -141,12 +177,13 @@ void selectionSort(vector a, bool sens) //sens == 0 - crescator
         {
             if(a.v[i]<a.v[j])
             {
+                interschimba(a,i,j);
+                delay(50);
                 aux=a.v[j];
                 a.v[j]=a.v[i];
                 a.v[i]=aux;
             }
         }
-        printVect(a);
 }
 
 void shiftVect(vector a, bool sens, int pozShift) //sens == 0 - dreapta
@@ -172,7 +209,6 @@ void shiftVect(vector a, bool sens, int pozShift) //sens == 0 - dreapta
             a.v[a.dim-1]=aux;
         }
     }
-    printVect(a);
 }
 
 

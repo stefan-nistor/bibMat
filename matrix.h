@@ -1,5 +1,5 @@
-#ifndef BIBMAT_MATRIX_H
-#define BIBMAT_MATRIX_H
+#ifndef GRAFICS_MATRIX_H
+#define GRAFICS_MATRIX_H
 #include <iostream>
 #include <cmath>
 
@@ -29,7 +29,6 @@ int sumUDiagSec (matrice );
 matrice product (matrice , matrice );
 matrice sum (int , matrice, matrice, ...);
 
-///\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\\
 
 matrice nullMatrix (int row = 0 , int col = 0) {
     matrice a;
@@ -64,6 +63,7 @@ void printMat (matrice m){
     std::cout << '\n';
 }
 matrice minorant;
+
 int determinant (matrice m, int n ){
     int det = 0;
 
@@ -109,7 +109,7 @@ matrice transpose(matrice m) {
 matrice product (matrice a, matrice b) {
     if (a.col != b.row) {
         std::cout << "Matrix cannot be multiplied!\n";
-        return _null;
+        return null;
     }
     matrice c;
 
@@ -125,7 +125,5 @@ matrice product (matrice a, matrice b) {
     return c;
 }
 
-matrice operator  * (matrice &A, matrice &B) {
-    return product(A,B);
-}
-#endif //BIBMAT_MATRIX_H
+
+#endif //GRAFICS_MATRIX_H

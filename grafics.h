@@ -673,7 +673,7 @@ void paginaMatrici() {
                             if(!eng)
                                 outtextxy(800, lastby + 30, "Matricea inversa este: ");
                             else
-                                outtextxy(800, lastay + 30, "The Inverse of B is: ");
+                                outtextxy(800, lastby + 30, "The Inverse of B is: ");
                             lastby += 30;
                             printMatrix(inversa(mat), lastbx, lastby);
                             fout << "inversa(B)\n";

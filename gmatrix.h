@@ -83,7 +83,7 @@ void kbinValxy(char* text, int x, int y, int& val, int dis = 0){
     int tw = textwidth(text), i = 0;
     c[i] = getch();
     while(int(c[i]) != 13){
-        if (c[i] > '0' && c[i] <= '9') {
+        if (c[i] >= '0' && c[i] <= '9') {
             bgiout << c[i];
             outstreamxy(tw + x + dis * 10, y);
             dis += 2;

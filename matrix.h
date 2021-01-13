@@ -1,5 +1,7 @@
-#ifndef GRAFICS_MATRIX_H
-#define GRAFICS_MATRIX_H
+#ifndef MATRIX_H_INCLUDED
+#define MATRIX_H_INCLUDED
+
+
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -275,4 +277,4 @@ matrice pow (matrice a, int exp){
     return b;
 }
 
-#endif //GRAFICS_MATRIX_H
+#endif // MATRIX_H_INCLUDED

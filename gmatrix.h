@@ -1,5 +1,9 @@
-#ifndef GRAFICS_GMATRIX_H
-#define GRAFICS_GMATRIX_H
+#ifndef GMATRIX_H_INCLUDED
+#define GMATRIX_H_INCLUDED
+
+
+
+
 #include "matrix.h"
 #include <winbgim.h>
 #include <graphics.h>
@@ -196,4 +200,5 @@ void notSquareError (matrice m){
         lastby += 30;
     }
 }
-#endif //GRAFICS_GMATRIX_H
+
+#endif // GMATRIX_H_INCLUDED

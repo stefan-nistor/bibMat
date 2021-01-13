@@ -162,7 +162,7 @@ void paginaVectori()
     setactivepage(1);
     setvisualpage(1);
     desenareVectori();
-    int ok=0,x,y,readI=0,i,tw,th,ok1,nrSort=0,pozShift,readShift=0,cresc[]={50,820,100,820,100,870,50,820},
+    int ok=0,okaco=0,x,y,readI=0,i,tw,th,ok1,nrSort=0,pozShift,readShift=0,cresc[]={50,820,100,820,100,870,50,820},
     descresc[]={1400,820,1450,870,1400,870,1400,820},prev[]={600,845,650,820,650,870,600,845},next[]={850,845,800,820,800,870,850,845};
     float dis;
     char c[100],car[2];
@@ -201,6 +201,16 @@ void paginaVectori()
                         }
                     }
                     ok1=0;
+                }
+                if(x>=1550&&x<=1870&&y>=50&&y<=150)
+                {
+                    okaco=1;
+                    printAcoperis(v);
+                }else
+                if(okaco==1)
+                {
+                    okaco=0;
+                    printVect(v);
                 }
             }
         }
@@ -251,8 +261,6 @@ void paginaVectori()
                         readI=1;
                     }
             }
-
-
 
             if(readI==1&&nrSort==0)//butoane sortari
             {
@@ -360,9 +368,10 @@ void paginaVectori()
                     bgiout<<car[0];
                     outstreamxy(700+(50-tw)/2,820+(50-th)/2);
                     pozShift=atoi(car);
+                    readShift=1;
                 }
             }
-            if(readI==1)
+            if(readI==1&&readShift)
             {
                 if(x>=600&&x<=650&&y>=820&&y<=870)
                 {
@@ -1226,9 +1235,6 @@ void paginaMatrici() {
         }
     }while (!ok);
 }
-
-
-
 
 
 void pagina()

@@ -5,7 +5,7 @@
 std::ofstream g("dateVectori.txt",std::ios::trunc);
 
 struct vect{
-    int v[10000];
+    int v[5000];
     int dim;
 };
 
@@ -15,17 +15,18 @@ void interschimba(vect a,int i,int j)
     setcolor(RED);
     line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[i]);
     line(50+dis/2+dis*j,800,50+dis/2+dis*j,800-a.v[j]);
-    delay(300);
+    delay(5000/a.dim);
     setcolor(BLACK);
     line(50+dis/2+dis*i,800,50+dis/2+dis*i,200);
     line(50+dis/2+dis*j,800,50+dis/2+dis*j,200);
     setcolor(RED);
     line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[j]);
     line(50+dis/2+dis*j,800,50+dis/2+dis*j,800-a.v[i]);
-    delay(300);
+    delay(5000/a.dim);
     setcolor(GREEN);
     line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[j]);
     line(50+dis/2+dis*j,800,50+dis/2+dis*j,800-a.v[i]);
+    setcolor(GREEN);
 }
 
 
@@ -38,9 +39,36 @@ void printVect(vect a)
     bar(50,200,1450,801);
     setcolor(GREEN);
     for(i=0;i<a.dim;i++)
+    {
         line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[i]);
+    }
 }
 
+void printVectAfterSort(vect a)
+{
+    int i;
+    float dis=1400/(a.dim*1.0);
+    for(i=0;i<a.dim;i++)
+    {
+        setcolor(BLACK);
+        line(50+dis/2+dis*i,800,50+dis/2+dis*i,200);
+        setcolor(GREEN);
+        line(50+dis/2+dis*i,800,50+dis/2+dis*i,800-a.v[i]);
+    }
+}
+
+void printAcoperis(vect a)
+{
+    int i,r,g,b;
+    float dis=1400/(a.dim*1.0);
+    r=rand()%255;
+    g=rand()%255;
+    b=rand()%255;
+    setcolor(RGB(r,g,b));
+    for(i=0;i<a.dim;i++)
+        if(i<a.dim-1)
+            line(50+dis/2+dis*i,800-a.v[i],50+dis/2+dis*(i+1),800-a.v[i+1]);
+}
 void readInterval(vect &v)
 {
     int i=0,dis=0,tw;
@@ -181,26 +209,26 @@ void InsertSort(vect &a, bool sens) //sens == 0 - crescator
         {   while(j>=0&&a.v[j]>key)
             {
                 a.v[j+1]=a.v[j];
-                printVect(a);
-                delay(150);
+                printVectAfterSort(a);
+                delay(5000/a.dim);
                 j--;
             }
             a.v[j+1]=key;
-            printVect(a);
-            delay(150);
+            printVectAfterSort(a);
+            delay(5000/a.dim);
         }
         else
         {
              while(j>=0&&a.v[j]<key)
             {
                 a.v[j+1]=a.v[j];
-                printVect(a);
-                delay(150);
+                printVectAfterSort(a);
+                delay(5000/a.dim);
                 j--;
             }
             a.v[j+1]=key;
-            printVect(a);
-            delay(150);
+            printVectAfterSort(a);
+            delay(5000/a.dim);
         }
     }
 }
@@ -314,8 +342,8 @@ void unire(vect &v, int s, int m, int d,bool sens)
         j++;
         k++;
     }
-    printVect(v);
-    delay(500);
+    printVectAfterSort(v);
+    delay(500/v.dim);
 }
 
 void MergeSort(vect &v,int s,int d,bool sens)
@@ -342,7 +370,7 @@ void shiftVect(vect &a, bool sens, int pozShift) //sens == 0 - dreapta
                 a.v[j]=a.v[j+1];
             a.dim--;
             printVect(a);
-            delay(150);
+            delay(5000/a.dim);
         }
     }
     else
@@ -353,7 +381,7 @@ void shiftVect(vect &a, bool sens, int pozShift) //sens == 0 - dreapta
                 a.v[j]=a.v[j+1];
             a.dim--;
             printVect(a);
-            delay(150);
+            delay(5000/a.dim);
         }
     }
 }
